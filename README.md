@@ -1,2 +1,2 @@
 # cus
-calculate a unique selector
+Calculate a unique selector of the DOM element
