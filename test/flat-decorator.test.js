@@ -15,7 +15,7 @@ describe('FlatDecorator', function() {
 		const flatDom = flatDecorator.decorate(dom.window);
 
 		it('should return expected flat object keys', function() {
-			assert.equal(Object.values(flatDom).length, 13243);
+			assert.equal(Object.values(flatDom).length, 13175);
 		});
 	});
 });

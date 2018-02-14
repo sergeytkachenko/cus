@@ -16,6 +16,9 @@ class FlatDecorator {
 		for (let i = 0; i < element.children.length; i++) {
 			const el = element.children[i];
 			const tagName = el.tagName.toLowerCase();
+			if (this._isIgnoreTag(tagName)) {
+				continue;
+			}
 			elements.push({
 				tagName: tagName,
 				attributes: this._getAttributes(el),
@@ -33,6 +36,11 @@ class FlatDecorator {
 			attributes[attribute.name] = attribute.value;
 		}
 		return attributes;
+	}
+
+	_isIgnoreTag(tagName) {
+		const ignored = ['script', 'style', 'br', 'hr', 'base', 'noscript'];
+		return ignored.includes(tagName);
 	}
 }
 
