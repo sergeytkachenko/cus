@@ -19,7 +19,8 @@ class FlatDecorator {
 			elements.push({
 				tagName: tagName,
 				attributes: this._getAttributes(el),
-				text: el.innerText || ''
+				text: el.innerText || '',
+				elements: this._decorateEl(el)
 			});
 		}
 		return elements;
