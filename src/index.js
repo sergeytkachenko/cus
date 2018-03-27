@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 
 	generateCSS(el) {
 		if (!(el instanceof Element))
@@ -26,4 +26,4 @@ module.exports = {
 		}
 		return path.join(">");
 	}
-};
+}
