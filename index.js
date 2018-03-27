@@ -1,10 +1,29 @@
-import FlatDecorator from './flat-decorator';
-
 export default {
 
-	create(win) {
-		const flatDecorator = new FlatDecorator;
-		const flatDom = flatDecorator.decorate(win);
-		return flatDom;
+	generateCSS(el) {
+		if (!(el instanceof Element))
+			return;
+		const path = [];
+		while (el.nodeType === Node.ELEMENT_NODE) {
+			let selector = el.nodeName.toLowerCase();
+			if (el.id){
+				path.unshift('#'+el.id);
+				break;
+			} else if (el.className){
+				path.unshift('.'+el.className.trim().replace(/\s+/g, "."));
+				break;
+			} else {
+				let sib = el, nth = 1;
+				while (sib = sib.previousElementSibling) {
+					if (sib.nodeName.toLowerCase() === selector)
+						nth++;
+				}
+				if (nth !== 1)
+					selector += ":nth-of-type("+nth+")";
+			}
+			path.unshift(selector);
+			el = el.parentNode;
+		}
+		return path.join(">");
 	}
 }
