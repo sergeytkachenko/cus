@@ -1,4 +1,4 @@
-module.exports = {
+exports.default = {
 
 	generateCSS(el) {
 		if (!(el instanceof Element))
