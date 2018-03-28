@@ -1,5 +1,5 @@
-import CSSSelector from 'css-selector'
-import XPathSelector from 'xpath-selector'
+import CSSSelector from './css-selector'
+import XPathSelector from './xpath-selector'
 
 export default {
 
