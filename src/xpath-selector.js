@@ -6,11 +6,12 @@ class XPathSelector {
 		while (el.nodeType === Node.ELEMENT_NODE) {
 			let tagName = el.nodeName.toLowerCase();
 			let attributesSelector = XPathSelector._getAttributesSelector(el);
-			path.unshift(`${tagName}${attributesSelector}`);
+			let textSelector = XPathSelector._getTextSelector(el);
+			path.unshift(`${tagName}${attributesSelector}${textSelector}`);
 			let xpath = `//${path.join("/")}`;
-			const elements = win.document.evaluate(xpath, win.document, null,
-				XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
-			if (path.length && elements.length === 1) {
+			const element = win.document.evaluate(xpath, win.document, null,
+				XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+			if (path.length && element === el) {
 				break;
 			}
 			el = el.parentNode;
@@ -28,6 +29,14 @@ class XPathSelector {
 			return templates.join('');
 		}
 		return '';
+	}
+
+	static _getTextSelector(el) {
+		const text = el.innerText;
+		if (!text) {
+			return null;
+		}
+		return `[contains(text(), '${text}')]`;
 	}
 };
 
