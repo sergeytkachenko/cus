@@ -1,6 +1,6 @@
 class CSSSelector {
 
-	static generateCSS(el, win = window) {
+	static generate(el, win = window) {
 		if (!(el instanceof win.Element)) return;
 		const path = [];
 		while (el.nodeType === Node.ELEMENT_NODE) {
