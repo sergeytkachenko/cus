@@ -1,6 +1,34 @@
+import Cus from "cus";
+
 class CSSSelector {
 
 	static generateUnique(el, win = window) {
+		if (!(el instanceof win.Element)) return;
+		const path = [];
+		CSSSelector._originEl = el;
+		while (el.nodeType === Node.ELEMENT_NODE) {
+			let tagName = el.nodeName.toLowerCase();
+			let classSelector = CSSSelector._getClassesSelector(el);
+			let idSelector = CSSSelector._getIdSelector(el);
+			let attributesSelector = CSSSelector._getAttributesSelector(el);
+			let elSelector = `${tagName}${idSelector}${classSelector}${attributesSelector}`;
+			path.unshift(elSelector);
+			let css = path.join(" > ");
+			let findEls = path.length && win.document.querySelectorAll(css);
+			if (findEls.length === 1 && findEls[0] === CSSSelector._originEl) {
+				break;
+			}
+			let withPrevElSelector = CSSSelector._getWithPrevEl(el,  win);
+			findEls = win.document.querySelectorAll(withPrevElSelector);
+			if (findEls.length === 1 && findEls[0] === CSSSelector._originEl) {
+				return withPrevElSelector;
+			}
+			el = el.parentNode;
+		}
+		return path.join(" > ");
+	}
+
+	static _generateUniqueWithoutPrevEl(el, win) {
 		if (!(el instanceof win.Element)) return;
 		const path = [];
 		while (el.nodeType === Node.ELEMENT_NODE) {
@@ -8,14 +36,11 @@ class CSSSelector {
 			let classSelector = CSSSelector._getClassesSelector(el);
 			let idSelector = CSSSelector._getIdSelector(el);
 			let attributesSelector = CSSSelector._getAttributesSelector(el);
-			path.unshift(`${tagName}${idSelector}${classSelector}${attributesSelector}`);
+			let elSelector = `${tagName}${idSelector}${classSelector}${attributesSelector}`;
+			path.unshift(elSelector);
 			let css = path.join(" > ");
 			if (path.length && win.document.querySelectorAll(css).length === 1) {
 				break;
-			}
-			let withPrevElSelector = CSSSelector._getWithPrevEl(el, win);
-			if (withPrevElSelector) {
-				return withPrevElSelector;
 			}
 			el = el.parentNode;
 		}
@@ -44,7 +69,7 @@ class CSSSelector {
 			if (value === '') {
 				return false;
 			}
-			return name !== 'class' && name !== 'id' && name !== 'style';
+			return name !== 'class' && name !== 'id' && name !== 'style' && !name.startsWith('on');
 		});
 		if (attributes.length) {
 			let templates = attributes.map(attr => `[${attr.name}="${attr.value}"]`);
@@ -54,19 +79,19 @@ class CSSSelector {
 	}
 
 	static _getWithPrevEl(el, win) {
-		const prevEl = el.previousSibling;
-		if (prevEl.nodeType !== Node.ELEMENT_NODE) {
+		const prevEl = el.previousElementSibling;
+		if (!prevEl || prevEl.nodeType !== Node.ELEMENT_NODE) {
 			return null;
 		}
-		const prevElSelector = CSSSelector.generateUnique(prevEl, win);
+		const prevElSelector = CSSSelector._generateUniqueWithoutPrevEl(prevEl, win);
 		if (prevElSelector.startsWith('html')) {
 			return null;
 		}
-		const tagName = el.nodeName.toLowerCase();
-		const classSelector = CSSSelector._getClassesSelector(el);
-		const idSelector = CSSSelector._getIdSelector(el);
-		const attributesSelector = CSSSelector._getAttributesSelector(el);
-		const elSelector = `${tagName}${idSelector}${classSelector}${attributesSelector}`;
+		let tagName = el.nodeName.toLowerCase();
+		let classSelector = CSSSelector._getClassesSelector(el);
+		let idSelector = CSSSelector._getIdSelector(el);
+		let attributesSelector = CSSSelector._getAttributesSelector(el);
+		let elSelector = `${tagName}${idSelector}${classSelector}${attributesSelector}`;
 		return `${prevElSelector} + ${elSelector}`;
 	}
 };
