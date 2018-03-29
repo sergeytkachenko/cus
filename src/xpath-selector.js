@@ -36,7 +36,7 @@ class XPathSelector {
 		if (!text) {
 			return null;
 		}
-		const replaceSymbols = /('\)\(,\[\])/g;
+		const replaceSymbols = /['\)\(,\[\]]/g;
 		const contains = text.slice(0, 50);
 		const str = contains.replace(replaceSymbols, '\\$1');
 		return `[contains(text(), '${str}')]`;
