@@ -1,6 +1,6 @@
 class XPathSelector {
 
-	static generate(el, win = window) {
+	static generateUnique(el, win = window) {
 		if (!(el instanceof win.Element)) return;
 		const path = [];
 		while (el.nodeType === Node.ELEMENT_NODE) {

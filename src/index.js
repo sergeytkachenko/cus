@@ -3,8 +3,15 @@ import XPathSelector from './xpath-selector'
 
 export default {
 
-	generateSelector(el, win = window) {
-		const css = CSSSelector.generate(el, win);
-		return css.startsWith('html') ? XPathSelector.generate(el, win) : css;
+	generateUniqueSelector(el, win = window) {
+		const css = CSSSelector.generateUnique(el, win);
+		if (!css.startsWith('html')) {
+			return css;
+		}
+		const xpath = XPathSelector.generateUnique(el, win);
+		if (!xpath.startsWith('//html')) {
+			return xpath;
+		}
+		return null;
 	}
 };
