@@ -4,6 +4,7 @@ import XPathSelector from './xpath-selector'
 function _clearFakeValues(str, fakeValues) {
 	fakeValues.forEach(val => {
 		str = str.replace(val, '');
+		str = str.replace('"', '\\"');
 	});
 	return str;
 }
