@@ -33,7 +33,7 @@ class CSSSelector {
 	static _generateUniqueWithoutPrevEl(el, win) {
 		if (!(el instanceof win.Element)) return;
 		const path = [];
-		while (el.nodeType === Node.ELEMENT_NODE) {
+		while (el.nodeType === Node.ELEMENT_NODE && el.tagName !== 'BODY') {
 			let tagName = el.nodeName.toLowerCase();
 			let classSelector = CSSSelector._getClassesSelector(el);
 			let idSelector = CSSSelector._getIdSelector(el);
