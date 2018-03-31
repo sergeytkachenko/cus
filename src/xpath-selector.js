@@ -5,7 +5,7 @@ class XPathSelector {
 			return;
 		}
 		const path = [];
-		while (el.nodeType === Node.ELEMENT_NODE || el.tagName !== 'BODY') {
+		while (el.nodeType === Node.ELEMENT_NODE && el.tagName !== 'BODY') {
 			let tagName = el.nodeName.toLowerCase();
 			let attributesSelector = XPathSelector._getAttributesSelector(el);
 			let textSelector = XPathSelector._getTextSelector(el);

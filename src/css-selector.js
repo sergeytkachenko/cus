@@ -8,7 +8,7 @@ class CSSSelector {
 		}
 		const path = [];
 		CSSSelector._originEl = el;
-		while (el.nodeType === Node.ELEMENT_NODE || el.tagName !== 'BODY') {
+		while (el.nodeType === Node.ELEMENT_NODE && el.tagName !== 'BODY') {
 			let tagName = el.nodeName.toLowerCase();
 			let classSelector = CSSSelector._getClassesSelector(el);
 			let idSelector = CSSSelector._getIdSelector(el);
