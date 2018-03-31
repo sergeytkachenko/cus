@@ -3,7 +3,9 @@ import Cus from "cus";
 class CSSSelector {
 
 	static generateUnique(el, win = window) {
-		if (!(el instanceof win.Element)) return;
+		if (!(el instanceof win.Element) || el.tagName === 'BODY') {
+			return;
+		}
 		const path = [];
 		CSSSelector._originEl = el;
 		while (el.nodeType === Node.ELEMENT_NODE) {

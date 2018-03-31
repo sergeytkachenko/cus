@@ -1,7 +1,9 @@
 class XPathSelector {
 
 	static generateUnique(el, win = window) {
-		if (!(el instanceof win.Element)) return;
+		if (!(el instanceof win.Element) || el.tagName === 'BODY') {
+			return;
+		}
 		const path = [];
 		while (el.nodeType === Node.ELEMENT_NODE) {
 			let tagName = el.nodeName.toLowerCase();
