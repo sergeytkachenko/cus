@@ -1,4 +1,4 @@
-class XPathSelector {
+class XPathFinder {
 
 	static generateUnique(el, win = window) {
 		if (!(el instanceof win.Element) || el.tagName === 'BODY') {
@@ -7,8 +7,8 @@ class XPathSelector {
 		const path = [];
 		while (el.nodeType === Node.ELEMENT_NODE && el.tagName !== 'BODY') {
 			let tagName = el.nodeName.toLowerCase();
-			let attributesSelector = XPathSelector._getAttributesSelector(el);
-			let textSelector = XPathSelector._getTextSelector(el);
+			let attributesSelector = XPathFinder._getAttributesSelector(el);
+			let textSelector = XPathFinder._getTextSelector(el);
 			path.unshift(`${tagName}${attributesSelector}${textSelector}`);
 			let xpath = `//${path.join("/")}`;
 			const element = win.document.evaluate(xpath, win.document, null,
@@ -45,4 +45,4 @@ class XPathSelector {
 	}
 };
 
-export default XPathSelector;
+module.exports = XPathFinder;
