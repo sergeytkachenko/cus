@@ -8,40 +8,40 @@ class CssFinder {
 		let el = findEl;
 		while (el.nodeType === Node.ELEMENT_NODE) {
 			let tagName = el.nodeName.toLowerCase();
+			let idCss = CssFinder._getIdSelector(el);
+			let classCss = CssFinder._getClassesSelector(el);
+			let attributesCss = CssFinder._getAttributesSelector(el);
+			let complexCss = `${tagName}${idCss}${classCss}${attributesCss}`;
 			if (tagName === 'body') {
+				let prevElCss = this.generateUnique(el.previousElementSibling, win);
+				if (prevElCss) {
+					const findElCss = idCss || classCss || attributesCss || tagName;
+					let css = `${prevElCss} + ${findElCss}`;
+					if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
+						return css;
+					}
+					css = `${prevElCss} + ${complexCss}`;
+					if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
+						return css;
+					}
+				}
 				return null;
 			}
-			let idCss = CssFinder._getIdSelector(el);
 			if (CssFinder._checkOnlyOneExistEl(idCss, findEl, win)) {
 				path.unshift(idCss);
 				break;
 			}
-			let classCss = CssFinder._getClassesSelector(el);
 			if (CssFinder._checkOnlyOneExistEl(classCss, findEl, win)) {
 				path.unshift(classCss);
 				break;
 			}
-			let attributesCss = CssFinder._getAttributesSelector(el);
 			if (CssFinder._checkOnlyOneExistEl(attributesCss, findEl, win)) {
 				path.unshift(attributesCss);
 				break;
 			}
-			let complexCss = `${tagName}${idCss}${classCss}${attributesCss}`;
 			if (CssFinder._checkOnlyOneExistEl(complexCss, findEl, win)) {
 				path.unshift(complexCss);
 				break;
-			}
-			let prevElCss = this.generateUnique(el.previousElementSibling, win);
-			if (prevElCss) {
-				const findElCss = idCss || classCss || attributesCss || tagName;
-				let css = `${prevElCss} + ${findElCss}`;
-				if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
-					return css;
-				}
-				css = `${prevElCss} + ${complexCss}`;
-				if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
-					return css;
-				}
 			}
 			el = el.parentNode;
 		}
