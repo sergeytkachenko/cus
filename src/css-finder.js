@@ -33,7 +33,7 @@ class CssFinder {
 			}
 			let prevElCss = this.generateUnique(el.previousElementSibling, win);
 			if (prevElCss) {
-				const findElCss = idCss || classCss || attributesCss;
+				const findElCss = idCss || classCss || attributesCss || tagName;
 				let css = `${prevElCss} + ${findElCss}`;
 				if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
 					return css;
