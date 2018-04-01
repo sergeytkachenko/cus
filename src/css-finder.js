@@ -26,7 +26,7 @@ class CssFinder {
 				path.unshift(attributesCss);
 				break;
 			}
-			let complexCss = `${idCss}${classCss}${attributesCss}`;
+			let complexCss = `${tagName}${idCss}${classCss}${attributesCss}`;
 			if (CssFinder._checkOnlyOneExistEl(complexCss, findEl, win)) {
 				path.unshift(complexCss);
 				break;
@@ -38,7 +38,7 @@ class CssFinder {
 				if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
 					return css;
 				}
-				css = `${prevElCss} + ${idCss}${classCss}${attributesCss}`;
+				css = `${prevElCss} + ${complexCss}`;
 				if (CssFinder._checkOnlyOneExistEl(css, findEl, win)) {
 					return css;
 				}
