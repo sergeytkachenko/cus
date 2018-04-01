@@ -64,14 +64,17 @@ class CssFinder {
 	}
 
 	static _getAttributesSelector(el) {
-		let attributes = Array.from(el.attributes).filter(attr => {
-			let name = attr.name;
-			let value = attr.value;
-			if (value === '') {
-				return false;
-			}
-			return name !== 'class' && name !== 'id' && name !== 'style' && !name.startsWith('on');
-		});
+		let attributes = Array.from(el.attributes)
+			.filter(attr => {
+				let name = attr.name;
+				let value = attr.value;
+				if (value === '') {
+					return false;
+				}
+				const nameIsValid = name !== 'class' && name !== 'id' && name !== 'style' && !name.startsWith('on');
+				const valueIsValid = parseInt(value).toString() !== value;
+				return nameIsValid && valueIsValid;
+			});
 		if (attributes.length) {
 			let templates = attributes.map(attr => `[${attr.name}="${attr.value}"]`);
 			return templates.join('');
