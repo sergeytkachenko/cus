@@ -11,24 +11,13 @@ function _clearFakeValues(str, fakeValues) {
 module.exports = {
 
 	generateUniqueSelector(el, win = window, fakeValues = []) {
-		let css = CssFinder.generateUnique(el, win);
+		const css = CssFinder.generateUnique(el, win);
 		if (css) {
-			css = _clearFakeValues(css, fakeValues);
-			let element = win.document.querySelector(css);
-			if (element && element.tagName === 'BODY') {
-				return null;
-			}
-			return css;
+			return _clearFakeValues(css, fakeValues);
 		}
-		let xpath = XPathFinder.generateUnique(el, win);
+		const xpath = XPathFinder.generateUnique(el, win);
 		if (!xpath.startsWith('//html')) {
-			xpath = _clearFakeValues(xpath, fakeValues);
-			const element = win.document.evaluate(xpath, win.document, null,
-				XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-			if (element && element.tagName === 'BODY') {
-				return null;
-			}
-			return xpath;
+			return _clearFakeValues(xpath, fakeValues);
 		}
 		return null;
 	}
