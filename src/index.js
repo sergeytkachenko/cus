@@ -11,7 +11,7 @@ function _clearFakeValues(str, fakeValues) {
 module.exports = {
 
 	generateUniqueSelector(el, win = window, fakeValues = []) {
-		const css = (new CssFinder).generateUnique(el, win);
+		const css = CssFinder.generateUnique(el, win);
 		if (css) {
 			return _clearFakeValues(css, fakeValues);
 		}
