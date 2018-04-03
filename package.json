@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Calculate a unique selector of the DOM element",
   "main": "src/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "assertion": "^1.3.35"
+  },
   "devDependencies": {
     "jsdom": "^11.6.2",
     "mocha": "^5.0.5"
