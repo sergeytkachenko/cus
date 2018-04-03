@@ -34,7 +34,7 @@ class XPathFinder {
 	}
 
 	static _getTextSelector(el) {
-		const text = el.innerText;
+		const text = el.outerText;
 		if (!text) {
 			return null;
 		}
