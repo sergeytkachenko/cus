@@ -24,7 +24,7 @@ class XPathFinder {
 	static _getAttributesSelector(el) {
 		let attributes = Array.from(el.attributes).filter(attr => {
 			let name = attr.name;
-			return name !== 'style';
+			return name !== 'style' && name !== 'href';
 		});
 		if (attributes.length) {
 			let templates = attributes.map(attr => `[@${attr.name}="${attr.value}"]`);

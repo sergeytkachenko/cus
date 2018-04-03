@@ -139,7 +139,7 @@ class CssFinder {
 				}
 				const nameIsValid = name !== 'class' && name !== 'id' && name !== 'style' && !name.startsWith('on');
 				const valueIsValid = parseInt(value).toString() !== value;
-				return nameIsValid && valueIsValid;
+				return nameIsValid && valueIsValid && name !== 'href';
 			});
 		if (attributes.length) {
 			let templates = attributes.map(attr => `[${attr.name}="${attr.value}"]`);
