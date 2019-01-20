@@ -126,7 +126,9 @@ class CssFinder {
 	}
 
 	static _getIdSelector(el) {
-		if (el.id) {
+		const id = el.id;
+		const hasNumber = /[0-9]/.test(id);
+		if (id && !hasNumber) {
 			return `#${el.id}`
 		}
 		return '';

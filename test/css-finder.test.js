@@ -58,6 +58,15 @@ describe('CssFinder', function() {
 			assert.equal(selector, '#timezone > p:first-child + p');
 		});
 
+		describe("when id has numbers", () => {
+			it('should not return id selector', function() {
+				let expectEl = DOM.window.document.querySelector('#not-unique-123');
+				const selector = CssFinder.generateUnique(expectEl, DOM.window);
+				assert.notEqual(selector, '#not-unique-123');
+				assert.equal(selector, '.id-with-numbers');
+			});
+		});
+
 		it('should expected time', function() {
 			const start = Date.now();
 			let expectEl = DOM.window.document.querySelector('#timezone').children[2];
