@@ -147,14 +147,19 @@ class CssFinder {
 	static _getAttributesSelector(el) {
 		let attributes = Array.from(el.attributes)
 			.filter(attr => {
-				let name = attr.name;
-				let value = attr.value;
-				if (value === '') {
+				let attrName = attr.name;
+				let attrValue = attr.value;
+				attrValue = CssFinder._trustedSelector(attrValue);
+				attrName = CssFinder._trustedSelector(attrName);
+				if (attrValue === '' || attrName === '') {
 					return false;
 				}
-				const nameIsValid = name !== 'class' && name !== 'id' && name !== 'style' && !name.startsWith('on');
-				const valueIsValid = parseInt(value).toString() !== value;
-				return nameIsValid && valueIsValid && name !== 'href';
+				const nameIsValid = attrName !== 'class'
+					&& attrName !== 'id'
+					&& attrName !== 'style'
+					&& !attrName.startsWith('on');
+				const valueIsValid = parseInt(attrValue).toString() !== attrValue;
+				return nameIsValid && valueIsValid && attrName !== 'href';
 			});
 		if (attributes.length) {
 			let templates = attributes.map(attr => `[${attr.name}="${attr.value}"]`);

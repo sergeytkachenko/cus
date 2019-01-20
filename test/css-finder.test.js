@@ -63,7 +63,31 @@ describe('CssFinder', function() {
 				let expectEl = DOM.window.document.querySelector('#not-unique-123');
 				const selector = CssFinder.generateUnique(expectEl, DOM.window);
 				assert.notEqual(selector, '#not-unique-123');
-				assert.equal(selector, '.id-with-numbers');
+				assert.equal(selector, '#bn-bot-wrap + .id-with-numbers');
+			});
+		});
+
+		describe("when class has numbers", () => {
+			it('should return expected selector', function() {
+				let expectEl = DOM.window.document.querySelector('#not-unique-124');
+				const selector = CssFinder.generateUnique(expectEl, DOM.window);
+				assert.equal(selector, '#bn-bot-wrap + .id-with-numbers + .id-with-numbers');
+			});
+		});
+
+		describe("when attribute value has numbers", () => {
+			it('should return expected selector', function() {
+				let expectEl = DOM.window.document.querySelector('#not-unique-125');
+				const selector = CssFinder.generateUnique(expectEl, DOM.window);
+				assert.equal(selector, '[data-cls="not-unique"]');
+			});
+		});
+
+		describe("when attribute name has numbers", () => {
+			it('should return expected selector', function() {
+				let expectEl = DOM.window.document.querySelector('#not-unique-126');
+				const selector = CssFinder.generateUnique(expectEl, DOM.window);
+				assert.equal(selector, '[data-cls="not-unique-two"]');
 			});
 		});
 
