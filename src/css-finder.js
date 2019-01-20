@@ -200,7 +200,10 @@ class CssFinder {
 	}
 
 	static _isOnlyOneExistEl(css, win) {
-		let findEls = css && win.document.querySelectorAll(css);
+		let findEls = [];
+		try {
+			findEls = css && win.document.querySelectorAll(css);
+		} catch (e) {}
 		return findEls.length === 1;
 	}
 };
