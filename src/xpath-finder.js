@@ -45,4 +45,4 @@ class XPathFinder {
 	}
 };
 
-module.exports = XPathFinder;
+export default XPathFinder;

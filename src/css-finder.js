@@ -217,7 +217,7 @@ class CssFinder {
 	}
 
 	static _isTrustedSelector(selector) {
-		const hasNumber = /[0-9]/.test(selector);
+		const hasNumber = /[0-9]{3,}/.test(selector);
 		return !hasNumber;
 	}
 
@@ -227,6 +227,6 @@ class CssFinder {
 		}
 		return '';
 	}
-};
+}
 
-module.exports = CssFinder;
+export  default CssFinder;
