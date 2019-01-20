@@ -126,20 +126,22 @@ class CssFinder {
 	}
 
 	static _getIdSelector(el) {
-		const id = el.id;
-		const hasNumber = /[0-9]/.test(id);
-		if (id && !hasNumber) {
-			return `#${el.id}`
+		const selector = CssFinder._trustedSelector(el.id);
+		if (selector) {
+			return `#${selector}`
 		}
 		return '';
 	}
 
 	static _getClassesSelector(el) {
-		if (el.className && el.className.trim) {
-			let classes = el.className.trim().replace(/\s+/g, ".");
-			return `.${classes}`
-		}
-		return '';
+		const classes = Object.values(el.classList)
+			.map(className => {
+				className = className.trim();
+				className = CssFinder._trustedSelector(className);
+				return className;
+			})
+			.filter(className => Boolean(className));
+		return `.${classes.join('.')}`;
 	}
 
 	static _getAttributesSelector(el) {
@@ -207,6 +209,18 @@ class CssFinder {
 			findEls = css && win.document.querySelectorAll(css);
 		} catch (e) {}
 		return findEls.length === 1;
+	}
+
+	static _isTrustedSelector(selector) {
+		const hasNumber = /[0-9]/.test(selector);
+		return !hasNumber;
+	}
+
+	static _trustedSelector(selector) {
+		if (CssFinder._isTrustedSelector(selector)) {
+			return selector;
+		}
+		return '';
 	}
 };
 
