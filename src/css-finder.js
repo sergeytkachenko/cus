@@ -192,7 +192,10 @@ class CssFinder {
 	}
 
 	static _checkOnlyOneExistEl(css, findEl, win) {
-		let findEls = css && win.document.querySelectorAll(css);
+		let findEls = [];
+		try {
+			findEls = css && win.document.querySelectorAll(css);
+		} catch (e) {}
 		return findEls.length === 1 && findEls[0] === findEl;
 	}
 
