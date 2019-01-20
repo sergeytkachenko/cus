@@ -133,7 +133,7 @@ class CssFinder {
 	}
 
 	static _getClassesSelector(el) {
-		if (el.className) {
+		if (el.className && el.className.trim) {
 			let classes = el.className.trim().replace(/\s+/g, ".");
 			return `.${classes}`
 		}
