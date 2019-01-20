@@ -2,7 +2,7 @@
   "name": "cus",
   "version": "1.0.0",
   "description": "Calculate a unique selector of the DOM element",
-  "main": "src/index.js",
+  "main": "dist/bundle.js",
   "dependencies": {
     "assertion": "^1.3.35"
   },
