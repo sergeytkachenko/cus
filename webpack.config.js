@@ -8,13 +8,13 @@ module.exports = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				use: 'ts-loader',
+				use: 'awesome-typescript-loader',
 				exclude: /node_modules/
 			}
 		]
 	},
 	resolve: {
-		extensions: [ '.tsx', '.ts', '.js' ]
+		extensions: [".ts", ".js", ".tsx", ".jsx"]
 	},
 	output: {
 		filename: 'index.js',

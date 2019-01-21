@@ -1,5 +1,5 @@
-import CssFinder from './css-finder';
-import XPathFinder from './xpath-finder';
+import CssFinder from './CssFinder';
+// import XPathFinder from './xpath-finder';
 
 function _clearFakeValues(str: string, fakeValues: Array<any>) {
     fakeValues.forEach(val => {
@@ -9,15 +9,15 @@ function _clearFakeValues(str: string, fakeValues: Array<any>) {
 }
 
 export default {
-    generateUniqueSelector(el: Element, win = window, fakeValues: Array<any> = []) {
+    generateUniqueSelector(el: Element, win = window, fakeValues: Array<any> = []) : string {
         const css = CssFinder.generateUnique(el, win);
         if (css) {
             return _clearFakeValues(css, fakeValues);
         }
-        const xpath = XPathFinder.generateUnique(el, win);
-        if (!xpath.startsWith('//html')) {
-            return _clearFakeValues(xpath, fakeValues);
-        }
+        // const xpath = XPathFinder.generateUnique(el, win);
+        // if (!xpath.startsWith('//html')) {
+        //     return _clearFakeValues(xpath, fakeValues);
+        // }
         return null;
     }
 }
