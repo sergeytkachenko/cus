@@ -12,7 +12,7 @@ describe('CssFinder', function () {
         //global.Node = {ELEMENT_NODE: 1};
     });
 
-    describe('generateUniqueSelector', function () {
+    describe('generateUniqueSelector', () => {
 
         it('should return expected id selector', function () {
             let expectEl = DOM.window.document.querySelector('#fizika');

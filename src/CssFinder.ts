@@ -42,7 +42,7 @@ class CssFinder {
         return path.join(" > ");
     }
 
-    static _concatSelectors(path: Array<string>, css: string) {
+    private static _concatSelectors(path: Array<string>, css: string) {
         let pathCss = path.join(" > ");
         if (pathCss && css) {
             return `${css} > ${pathCss}`;
@@ -50,7 +50,7 @@ class CssFinder {
         return css;
     }
 
-    static _generateUniqueByPrev(findEl: Element, win: any) {
+    private static _generateUniqueByPrev(findEl: Element, win: any) {
         let prevEl = findEl.previousElementSibling;
         const selectors = [];
         while(prevEl && prevEl.nodeType === win.Node.ELEMENT_NODE) {
@@ -70,7 +70,7 @@ class CssFinder {
         return null;
     }
 
-    static _getPrevUnique(nextEl: Element, win: any) {
+    private static _getPrevUnique(nextEl: Element, win: any) {
         const prevEl = nextEl.previousElementSibling;
         if (!prevEl || prevEl.nodeType !== win.Node.ELEMENT_NODE) {
             return null;
@@ -92,7 +92,7 @@ class CssFinder {
         return null;
     }
 
-    static _generateUnique(findEl: Element, win: any) {
+    private static _generateUnique(findEl: Element, win: any) {
         if (!(findEl instanceof win.Element)) {
             return;
         }
@@ -125,7 +125,7 @@ class CssFinder {
         return path.join(" > ");
     }
 
-    static _getIdSelector(el: Element) {
+    private static _getIdSelector(el: Element) {
         const selector = CssFinder._trustedSelector(el.id);
         if (selector) {
             return `#${selector}`
@@ -133,7 +133,7 @@ class CssFinder {
         return '';
     }
 
-    static _getClassesSelector(el: Element) {
+    private static _getClassesSelector(el: Element) {
         const classes = Object.values(el.classList)
             .map(className => {
                 className = className.trim();
@@ -145,7 +145,7 @@ class CssFinder {
         return classes.join('');
     }
 
-    static _getAttributesSelector(el: Element) {
+    private static _getAttributesSelector(el: Element) {
         let attributes = Array.from(el.attributes)
             .filter(attr => {
                 let attrName = attr.name;
@@ -169,7 +169,7 @@ class CssFinder {
         return '';
     }
 
-    static _getChildSelector(el: Element, win: any) {
+    private static _getChildSelector(el: Element, win: any) {
         let prevEl = el.previousElementSibling;
         const nextEl = el.nextElementSibling;
         if (!prevEl || prevEl.nodeType !== win.Node.ELEMENT_NODE) {
@@ -181,7 +181,7 @@ class CssFinder {
         return '';
     }
 
-    static _getSiblingSelector(el: Element, win: any) {
+    private static _getSiblingSelector(el: Element, win: any) {
         const selectors = [];
         let prevEl = el.previousElementSibling;
         while(prevEl && prevEl.nodeType === win.Node.ELEMENT_NODE) {
@@ -201,7 +201,7 @@ class CssFinder {
         return selectors.length ? `${selectors.join(' + ')} + ` : '';
     }
 
-    static _checkOnlyOneExistEl(css: string, findEl: Element, win: any) {
+    private static _checkOnlyOneExistEl(css: string, findEl: Element, win: any) {
         let findEls = [];
         try {
             findEls = css && win.document.querySelectorAll(css);
@@ -209,7 +209,7 @@ class CssFinder {
         return findEls.length === 1 && findEls[0] === findEl;
     }
 
-    static _isOnlyOneExistEl(css: string, win: any) {
+    private static _isOnlyOneExistEl(css: string, win: any) {
         let findEls = [];
         try {
             findEls = css && win.document.querySelectorAll(css);
@@ -217,12 +217,12 @@ class CssFinder {
         return findEls.length === 1;
     }
 
-    static _isTrustedSelector(selector: string) {
+    private static _isTrustedSelector(selector: string) {
         const hasNumber = /[0-9]{3,}/.test(selector);
         return !hasNumber;
     }
 
-    static _trustedSelector(selector: string) {
+    private static _trustedSelector(selector: string) {
         if (CssFinder._isTrustedSelector(selector)) {
             return selector;
         }
