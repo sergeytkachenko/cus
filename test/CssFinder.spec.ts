@@ -17,51 +17,51 @@ describe('CssFinder', function () {
         it('should return expected id selector', function () {
             let expectEl = DOM.window.document.querySelector('#fizika');
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, '#fizika');
+            assert.strictEqual(selector, '#fizika');
         });
 
         it('should return expected class selector', function () {
             let expectEl = DOM.window.document.querySelector('.unique-cls');
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, '.unique-cls');
+            assert.strictEqual(selector, '.unique-cls');
         });
 
         it('should return expected next(1n) by id selector', function () {
             let expectEl = DOM.window.document.querySelector('#second-el').nextElementSibling;
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, 'span#second-el.sf_title + span.sf_title');
+            assert.strictEqual(selector, 'span#second-el.sf_title + span.sf_title');
         });
 
         it('should return expected next(2n) by id selector', function () {
             let expectEl = DOM.window.document.querySelector('#in-center-el').nextElementSibling.nextElementSibling;
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, 'span#in-center-el.sf_title + span.sf_title + span.sf_title');
+            assert.strictEqual(selector, 'span#in-center-el.sf_title + span.sf_title + span.sf_title');
         });
 
         it('should return expected first-child', function () {
-            let expectEl = DOM.window.document.querySelector('#timezone').children[0];
+            let expectEl = DOM.window.document.querySelector('#timezone > p:first-child');
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, '#timezone > p:first-child');
+            assert.strictEqual(selector, '#timezone > p:first-child');
         });
 
         it('should return expected last-child', function () {
             let expectEl = DOM.window.document.querySelector('#timezone').children[2];
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, '#timezone > p:first-child + p + p:last-child');
+            assert.strictEqual(selector, '#timezone > p:first-child + p + p:last-child');
         });
 
         it('should return expected first-child + p', function () {
             let expectEl = DOM.window.document.querySelector('#timezone').children[1];
             const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-            assert.equal(selector, '#timezone > p:first-child + p');
+            assert.strictEqual(selector, '#timezone > p:first-child + p');
         });
 
         describe("when id has numbers", () => {
             it('should not return id selector', function () {
                 let expectEl = DOM.window.document.querySelector('#not-unique-123');
                 const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-                assert.notEqual(selector, '#not-unique-123');
-                assert.equal(selector, '#bn-bot-wrap + .id-with-numbers');
+                assert.notStrictEqual(selector, 'div#not-unique-123');
+                assert.strictEqual(selector, 'div#bn-bot-wrap + div.id-with-numbers');
             });
         });
 
@@ -69,7 +69,7 @@ describe('CssFinder', function () {
             it('should return expected selector', function () {
                 let expectEl = DOM.window.document.querySelector('#not-unique-124');
                 const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-                assert.equal(selector, '#bn-bot-wrap + .id-with-numbers + .id-with-numbers');
+                assert.strictEqual(selector, '#bn-bot-wrap + .id-with-numbers + .id-with-numbers');
             });
         });
 
@@ -77,7 +77,7 @@ describe('CssFinder', function () {
             it('should return expected selector', function () {
                 let expectEl = DOM.window.document.querySelector('#not-unique-125');
                 const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-                assert.equal(selector, '[data-cls="not-unique"]');
+                assert.strictEqual(selector, '[data-cls="not-unique"]');
             });
         });
 
@@ -85,7 +85,7 @@ describe('CssFinder', function () {
             it('should return expected selector', function () {
                 let expectEl = DOM.window.document.querySelector('#not-unique-126');
                 const selector = CssFinder.generateUniqueSelector(expectEl, DOM.window);
-                assert.equal(selector, '[data-cls="not-unique-two"]');
+                assert.strictEqual(selector, '[data-cls="not-unique-two"]');
             });
         });
 

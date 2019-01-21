@@ -140,8 +140,9 @@ class CssFinder {
                 className = CssFinder._trustedSelector(className);
                 return className;
             })
-            .filter(className => Boolean(className));
-        return `.${classes.join('.')}`;
+            .filter(className => Boolean(className))
+            .map(className => `.${className}`);
+        return classes.join('');
     }
 
     static _getAttributesSelector(el: Element) {
