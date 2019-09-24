@@ -6,16 +6,16 @@ Calculate stable human unique CSS or XPATH selector of the dom element
 
 ##### Instance:
 ```js
-const humanCssInspector = new HumanCssInspector(window);
-const humanXpathInspector = new HumanXpathInspector(window);
+const cssHumanInspector = new CssHumanInspector(window);
+const xpathHumanInspector = new XpathHumanInspector(window);
 ```
 
 ##### Usage:
 ```js
-const css = humanCssInspector.calculate(sourceElement);
+const css = cssHumanInspector.calculate(sourceElement);
 console.log(css); // like ".common-price", or "#author", "[data-id="cus-067"]"
 
-const xpath = humanCssInspector.calculate(sourceElement);
+const xpath = xpathHumanInspector.calculate(sourceElement);
 console.log(xpath); // like "//div[contains(@class, 'common-price')]"
 ```
 
@@ -29,5 +29,5 @@ const calculateParameters = new CalculateParameters();
 calculateParameters.findAttributeRules = findAttributeRules;
 calculateParameters.depth = 5;
 calculateParameters.rootElement = rootElement;
-const css = humanCssInspector.calculate(sourceElement, calculateParameters);
+const css = cssHumanInspector.calculate(sourceElement, calculateParameters);
 ```
