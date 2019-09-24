@@ -21,13 +21,15 @@ console.log(xpath); // like "//div[contains(@class, 'common-price')]"
 
 ##### Extended usage:
 ```js
+const sourceElement = document.body.lastElementChild;
+
 const findAttributeRules = new FindAttributeRules();
 findAttributeRules.excludeAttributeNames = ['data-qa', 'qa', '...'];
 findAttributeRules.excludeAttributeValueRegex = [/[0-9]/]; // exclude this if value has number 
 
-const calculateParameters = new CalculateParameters();
-calculateParameters.findAttributeRules = findAttributeRules;
-calculateParameters.depth = 5;
-calculateParameters.rootElement = rootElement;
-const css = cssHumanInspector.calculate(sourceElement, calculateParameters);
+const calculateConfig = new CalculateConfig();
+calculateConfig.findAttributeRules = findAttributeRules;
+calculateConfig.depth = 5;
+calculateConfig.rootElement = rootElement;
+const css = cssHumanInspector.calculate(sourceElement, calculateConfig);
 ```
