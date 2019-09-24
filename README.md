@@ -5,13 +5,13 @@ Calculate stable human unique CSS or XPATH selector of the dom element
 ### API
 
 ##### Instance:
-```
+```js
 const humanCssInspector = new HumanCssInspector(window);
 const humanXpathInspector = new HumanXpathInspector(window);
 ```
 
 ##### Usage:
-```
+```js
 const css = humanCssInspector.calculate(sourceElement);
 console.log(css); // like ".common-price", or "#author", "[data-id="cus-067"]"
 
@@ -20,7 +20,7 @@ console.log(xpath); // like "//div[contains(@class, 'common-price')]"
 ```
 
 ##### Extended usage:
-```
+```js
 const findAttributeRules = new FindAttributeRules();
 findAttributeRules.excludeAttributeNames = ['data-qa', 'qa', '...'];
 findAttributeRules.excludeAttributeValueRegex = [/[0-9]/]; // exclude this if value has number 
