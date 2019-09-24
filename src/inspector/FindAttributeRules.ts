@@ -1,4 +1,4 @@
 class FindAttributeRules {
-    excludeAttributeNames: string[];
-    excludeAttributeValueRegex: RegExp[];
+    excludeAttributeNames: string[] = [];
+    excludeAttributeValueRegex: RegExp[] = [];
 }

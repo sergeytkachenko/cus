@@ -21,7 +21,7 @@ console.log(xpath); // like "//div[contains(@class, 'common-price')]"
 
 ##### Extended usage:
 ```js
-const sourceElement = document.body.lastElementChild;
+const sourceElement = document.body.lastElementChild; // example random element
 
 const findAttributeRules = new FindAttributeRules();
 findAttributeRules.excludeAttributeNames = ['data-qa', 'qa', '...'];

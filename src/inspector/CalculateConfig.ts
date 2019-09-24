@@ -1,5 +1,5 @@
 class CalculateConfig {
-    findAttributeRules: FindAttributeRules;
-    depth: Number;
-    rootElement: Element;
+    findAttributeRules: FindAttributeRules = null;
+    depth: Number = 20;
+    rootElement: Element = null;
 }
