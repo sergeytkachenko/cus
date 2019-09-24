@@ -18,4 +18,6 @@ abstract class HumanInspector {
         }
         this.calculateConfig = calculateConfig;
     }
+
+    abstract checkOnlyOneElementExists(selector: string): boolean;
 }
