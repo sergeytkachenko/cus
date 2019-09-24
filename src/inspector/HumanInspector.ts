@@ -1,14 +1,21 @@
 abstract class HumanInspector {
+    calculateConfig: CalculateConfig;
     win: Window;
+
     constructor(window: Window) {
         this.win = window;
     }
-    abstract calculate(sourceElement: Element) : string;
 
-    protected isElement(sourceElement: Element): boolean {
-        return sourceElement instanceof Element;
-    }
-    protected isNodeElement(sourceElement: Element): boolean {
-        return sourceElement.nodeType === Node.ELEMENT_NODE;
+    calculate(sourceElement: Element, calculateConfig?: CalculateConfig) : string {
+        this.setCalculateConfig(calculateConfig);
+        DomElementValidator.checkIsCorrectElement(sourceElement);
+        return '';
+    };
+
+    private setCalculateConfig(calculateConfig: CalculateConfig) {
+        if (!calculateConfig) {
+            calculateConfig = new DefaultCalculateConfig();
+        }
+        this.calculateConfig = calculateConfig;
     }
 }

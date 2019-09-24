@@ -1,0 +1,3 @@
+class IncorrectElementException extends DOMException {
+
+}
