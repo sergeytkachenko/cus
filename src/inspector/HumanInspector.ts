@@ -12,12 +12,12 @@ abstract class HumanInspector {
         return '';
     };
 
+    abstract checkOnlyOneElementExists(selector: string): boolean;
+
     private setCalculateConfig(calculateConfig: CalculateConfig) {
         if (!calculateConfig) {
             calculateConfig = new DefaultCalculateConfig();
         }
         this.calculateConfig = calculateConfig;
     }
-
-    abstract checkOnlyOneElementExists(selector: string): boolean;
 }
